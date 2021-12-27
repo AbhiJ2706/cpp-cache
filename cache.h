@@ -23,8 +23,9 @@ class Cache {
     int num_entries;
     int index_bits;
     int block_size;
+    int addr_length;
     public:
-        Cache(int ways=2, int num_entries=8, int block_size=1);
+        Cache(int ways=2, int num_entries=8, int block_size=1, int addr_length=8);
         bool receiveEntry(string addr, int mem_addr, bool dirty=false);
         void update();
         

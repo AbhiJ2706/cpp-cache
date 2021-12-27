@@ -20,6 +20,8 @@ class CacheEntry {
         string getTag() const {return this->tag;};
         int getTime() const {return this->time;};
         vector<int> getBlock() const {return this->block;};
+        bool getValid() {return this->valid;};
+        bool getDirty() {return this->dirty;};
         bool hit(string tag, int addr);
 };
 
