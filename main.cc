@@ -12,6 +12,7 @@ void hit_or_miss(bool h) {
 }
 
 int main() {
+    //set associative
     Cache x{2, 8, 4};
     hit_or_miss(x.receiveEntry("00001001", 24));
     x.update();
@@ -28,6 +29,7 @@ int main() {
     x.update();
     cout << x << endl;
 
+    //direct-mapped
     Cache y{1, 16, 1};
     hit_or_miss(y.receiveEntry("00001001", 24));
     y.update();
@@ -41,7 +43,8 @@ int main() {
     y.update();
     cout << y << endl;
 
-    Cache z{1, 16, 1};
+    //fully associative
+    Cache z{16, 1, 1};
     hit_or_miss(z.receiveEntry("00001001", 24));
     z.update();
     hit_or_miss(z.receiveEntry("11111111", 376));
@@ -50,7 +53,7 @@ int main() {
     z.update();
     hit_or_miss(z.receiveEntry("11001001", 188));
     z.update();
-    hit_or_miss(z.receiveEntry("00001001", 0));
+    hit_or_miss(z.receiveEntry("00001001", 24));
     z.update();
     cout << z << endl;
 }

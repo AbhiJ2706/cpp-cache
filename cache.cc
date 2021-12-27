@@ -30,13 +30,13 @@ Cache::Cache(int ways, int num_entries, int block_size)
 bool Cache::receiveEntry(string addr, int mem_addr, bool dirty) {
     string index = addr.substr(addr.size() - index_bits, addr.size());
     string tag = addr.substr(0, addr.size() - index_bits);
+    for (auto ent: this->entries[index]) {
+        if (ent->hit(tag, mem_addr)) return true;
+    }
     if (this->entries[index].size() < this->ways) {
         shared_ptr<CacheEntry> x = make_shared<CacheEntry>(tag, mem_addr, dirty, this->block_size);
         this->entries[index].push_back(x);
         return false;
-    }
-    for (auto ent: this->entries[index]) {
-        if (ent->hit(tag, mem_addr)) return true;
     }
     shared_ptr<CacheEntry> max_time_index = this->entries[index][0];
     int max_time = 0;
